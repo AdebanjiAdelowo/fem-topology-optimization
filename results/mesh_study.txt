@@ -1,0 +1,6 @@
+Mesh-resolution study: Vf=0.4, p=3.0, r_min = 3.0 * h (h = L/nx)
+
+  nx   ny        h    r_min  n_elem  iters  time(s)   compliance  grayness
+  30   15   0.0667   0.2000     450    150     3.73     175.4809    0.6349
+  60   30   0.0333   0.1000    1800    150     4.98     109.9431    0.3816
+  90   45   0.0222   0.0667    4050    150     7.54      94.3880    0.2601

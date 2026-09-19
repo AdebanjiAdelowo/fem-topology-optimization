@@ -1,0 +1,9 @@
+Sensitivity Taylor-remainder test: mesh 8x4, p=3.0, Vf=0.4, r_min=0.1, n_elements=32
+c(rho0) = 3.21819228e+02, grad.d = -2.77259014e+02
+
+         t        remainder   observed order
+   1.0e-01     1.187941e+01               --
+   1.0e-02     1.345566e-01            1.946
+   1.0e-03     1.363426e-03            1.994
+   1.0e-04     1.365235e-05            1.999
+   1.0e-05     1.364828e-07            2.000

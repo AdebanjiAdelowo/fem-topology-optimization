@@ -1,0 +1,6 @@
+Filter-radius study: mesh 60x30, Vf=0.4, p=3.0
+
+  r_min  iters   compliance  grayness
+  0.040    150      84.5195    0.1377
+  0.080    150     101.3918    0.3171
+  0.160    150     150.1396    0.5603

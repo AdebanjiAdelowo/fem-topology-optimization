@@ -1,0 +1,11 @@
+Canonical SIMP cantilever benchmark: mesh 60x30 (1800 elements), L=2.0, H=1.0
+E0=1.0, Emin=1e-09, nu=0.3, p=3.0, Vf=0.4, r_min=0.08, move=0.2
+point load (0,-1) at (2.0, 0.5)
+
+iterations run: 150 (max_iter=150)
+change_tol reached (converged by design-change criterion): False
+final compliance: 101.391807
+initial (uniform-density) compliance: 617.855262
+final volume fraction: 0.400263 (target 0.4)
+final max design change: 0.015361
+grayness (discreteness) metric: 0.317090  (0 = fully 0/1 design, 1 = every element at rho=0.5)

@@ -1,0 +1,68 @@
+# Higher-resolution configuration for the final reported portfolio results.
+
+canonical:
+  nx: 120
+  ny: 60
+  L: 2.0
+  H: 1.0
+  E0: 1.0
+  Emin: 1.0e-9
+  nu: 0.3
+  p: 3.0
+  Vf: 0.4
+  r_min: 0.04
+  move: 0.2
+  max_iter: 200
+  change_tol: 1.0e-3
+
+mesh_study:
+  resolutions: [[30, 15], [60, 30], [90, 45], [120, 60], [150, 75]]
+  L: 2.0
+  H: 1.0
+  Vf: 0.4
+  p: 3.0
+  r_min_per_h: 3.0
+  max_iter: 200
+  change_tol: 1.0e-3
+
+volume_fraction_study:
+  nx: 120
+  ny: 60
+  L: 2.0
+  H: 1.0
+  p: 3.0
+  r_min: 0.04
+  volume_fractions: [0.3, 0.4, 0.5]
+  max_iter: 200
+  change_tol: 1.0e-3
+
+penalization_study:
+  nx: 120
+  ny: 60
+  L: 2.0
+  H: 1.0
+  Vf: 0.4
+  r_min: 0.04
+  penalizations: [1.0, 2.0, 3.0]
+  max_iter: 200
+  change_tol: 1.0e-3
+
+filter_radius_study:
+  nx: 120
+  ny: 60
+  L: 2.0
+  H: 1.0
+  Vf: 0.4
+  p: 3.0
+  filter_radii: [0.02, 0.04, 0.08]
+  max_iter: 200
+  change_tol: 1.0e-3
+
+sensitivity_taylor:
+  nx: 10
+  ny: 5
+  L: 2.0
+  H: 1.0
+  Vf: 0.4
+  p: 3.0
+  r_min: 0.1

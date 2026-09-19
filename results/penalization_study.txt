@@ -1,0 +1,6 @@
+Penalization study: mesh 60x30, Vf=0.4, r_min=0.08
+
+     p  iters   compliance  grayness
+   1.0    150      65.3023    0.5999
+   2.0    150      88.0593    0.3207
+   3.0    150     101.3918    0.3171
