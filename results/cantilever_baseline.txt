@@ -1,0 +1,9 @@
+Cantilever baseline: L=2.0, H=1.0, E=1.0, nu=0.3, load=(0.0, -1.0) at (2.0, 0.5)
+max |u| = 39.742026
+max von Mises stress = 49.840772
+total strain energy (integral over domain) = 19.871013
+
+Physical scaling checks (exact linearity expected for linear elasticity):
+  tip deflection (v-component) at baseline (E=1.0, F=1): -39.742026
+  tip deflection at E=2.0 (F=1): -19.871013  (expect exactly -19.871013; ratio=0.500000)
+  tip deflection at E=1.0 (F=2): -79.484053  (expect exactly -79.484053; ratio=2.000000)
