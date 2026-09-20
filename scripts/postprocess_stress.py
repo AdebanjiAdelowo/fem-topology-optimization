@@ -49,11 +49,12 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=str(ROOT / "configs" / "local.yaml"))
     args = ap.parse_args()
+    config_tag = pathlib.Path(args.config).stem
     cfg = yaml.safe_load(pathlib.Path(args.config).read_text())["canonical"]
 
-    rho_path = RESULTS_DIR / "topopt_canonical_rho_phys.npy"
+    rho_path = RESULTS_DIR / f"topopt_canonical_rho_phys_{config_tag}.npy"
     if not rho_path.exists():
-        raise SystemExit("Run scripts/run_topopt.py first to produce "
+        raise SystemExit(f"Run scripts/run_topopt.py --config {args.config} first to produce "
                           f"{rho_path.relative_to(ROOT)}.")
     rho_phys = np.load(rho_path)
 
@@ -109,7 +110,7 @@ def main() -> None:
     fig.suptitle("Post-hoc stress evaluation of a COMPLIANCE-minimizing SIMP design")
     fig.tight_layout()
     FIG_DIR.mkdir(exist_ok=True)
-    fig.savefig(FIG_DIR / "topopt_stress_postprocess.png", dpi=150)
+    fig.savefig(FIG_DIR / f"topopt_stress_postprocess_{config_tag}.png", dpi=150)
 
     lines = [
         "Post-hoc von Mises stress evaluation of the compliance-optimized cantilever "
@@ -123,10 +124,11 @@ def main() -> None:
         f"NOT physically meaningful, reported only for completeness): {max_vm_everywhere:.6f}",
     ]
     RESULTS_DIR.mkdir(exist_ok=True)
-    (RESULTS_DIR / "topopt_stress_postprocess.txt").write_text("\n".join(lines) + "\n")
+    (RESULTS_DIR / f"topopt_stress_postprocess_{config_tag}.txt").write_text("\n".join(lines) + "\n")
     for line in lines:
         print(line)
-    print("\nWrote figures/topopt_stress_postprocess.png and results/topopt_stress_postprocess.txt")
+    print(f"\nWrote figures/topopt_stress_postprocess_{config_tag}.png and "
+          f"results/topopt_stress_postprocess_{config_tag}.txt")
 
 
 if __name__ == "__main__":

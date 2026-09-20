@@ -1,0 +1,5 @@
+Post-hoc von Mises stress evaluation of the compliance-optimized cantilever (scripts/run_topopt.py output).
+This structure minimizes COMPLIANCE under a volume constraint; it was NOT stress-constrained or stress-optimized in any way. Stress-constrained topology optimization (Duysinx & Bendsoe 1998) is out of scope for this project (see README).
+
+max von Mises stress (solid material, rho_phys >= 0.5): 52.705161
+max von Mises stress (everywhere, including near-void elements -- NOT physically meaningful, reported only for completeness): 85.568762

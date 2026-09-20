@@ -40,6 +40,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=str(ROOT / "configs" / "local.yaml"))
     args = ap.parse_args()
+    config_tag = pathlib.Path(args.config).stem
     cfg = yaml.safe_load(pathlib.Path(args.config).read_text())["sensitivity_taylor"]
 
     em = build_mesh(cfg["nx"], cfg["ny"], L=cfg["L"], H=cfg["H"])
@@ -77,7 +78,7 @@ def main() -> None:
         lines.append(f"{t:10.1e} {remainders[i]:16.6e} {order_str:>16}")
 
     RESULTS_DIR.mkdir(exist_ok=True)
-    (RESULTS_DIR / "sensitivity_taylor_test.txt").write_text("\n".join(lines) + "\n")
+    (RESULTS_DIR / f"sensitivity_taylor_test_{config_tag}.txt").write_text("\n".join(lines) + "\n")
     for line in lines:
         print(line)
 
@@ -91,8 +92,8 @@ def main() -> None:
     ax.grid(True, which="both", alpha=0.3)
     fig.tight_layout()
     FIG_DIR.mkdir(exist_ok=True)
-    fig.savefig(FIG_DIR / "sensitivity_taylor_test.png", dpi=150)
-    print("\nWrote results/sensitivity_taylor_test.txt and figures/sensitivity_taylor_test.png")
+    fig.savefig(FIG_DIR / f"sensitivity_taylor_test_{config_tag}.png", dpi=150)
+    print(f"\nWrote results/sensitivity_taylor_test_{config_tag}.txt and figures/sensitivity_taylor_test_{config_tag}.png")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,5 @@
+Volume-fraction study: mesh 20x10, p=3.0, r_min=0.15
+
+    Vf  iters   compliance  grayness
+  0.30     30     300.1588    0.5569
+  0.50     30      94.1362    0.5151

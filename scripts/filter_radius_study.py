@@ -32,6 +32,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=str(ROOT / "configs" / "local.yaml"))
     args = ap.parse_args()
+    config_tag = pathlib.Path(args.config).stem
     cfg = yaml.safe_load(pathlib.Path(args.config).read_text())["filter_radius_study"]
 
     L, H = cfg["L"], cfg["H"]
@@ -62,13 +63,13 @@ def main() -> None:
     fig.suptitle("Filter-radius study")
     fig.tight_layout()
     FIG_DIR.mkdir(exist_ok=True)
-    fig.savefig(FIG_DIR / "filter_radius_study.png", dpi=150)
+    fig.savefig(FIG_DIR / f"filter_radius_study_{config_tag}.png", dpi=150)
 
     RESULTS_DIR.mkdir(exist_ok=True)
-    (RESULTS_DIR / "filter_radius_study.txt").write_text("\n".join(lines) + "\n")
+    (RESULTS_DIR / f"filter_radius_study_{config_tag}.txt").write_text("\n".join(lines) + "\n")
     for line in lines:
         print(line)
-    print("\nWrote figures/filter_radius_study.png and results/filter_radius_study.txt")
+    print(f"\nWrote figures/filter_radius_study_{config_tag}.png and results/filter_radius_study_{config_tag}.txt")
 
 
 if __name__ == "__main__":

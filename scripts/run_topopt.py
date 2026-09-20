@@ -38,6 +38,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default=str(ROOT / "configs" / "local.yaml"))
     args = ap.parse_args()
+    config_tag = pathlib.Path(args.config).stem  # e.g. "smoke"/"local"/"full", for output filenames
     cfg = yaml.safe_load(pathlib.Path(args.config).read_text())["canonical"]
 
     L, H = cfg["L"], cfg["H"]
@@ -64,7 +65,7 @@ def main() -> None:
                  f"r_min={params.r_min}, Vf={params.Vf}")
     fig.tight_layout()
     FIG_DIR.mkdir(exist_ok=True)
-    fig.savefig(FIG_DIR / "topopt_canonical_density.png", dpi=150)
+    fig.savefig(FIG_DIR / f"topopt_canonical_density_{config_tag}.png", dpi=150)
 
     # --- convergence histories ---
     fig2, axes2 = plt.subplots(3, 1, figsize=(7, 8), sharex=True)
@@ -82,7 +83,7 @@ def main() -> None:
     axes2[2].legend(fontsize=8)
     fig2.suptitle("SIMP optimization convergence history")
     fig2.tight_layout()
-    fig2.savefig(FIG_DIR / "topopt_canonical_history.png", dpi=150)
+    fig2.savefig(FIG_DIR / f"topopt_canonical_history_{config_tag}.png", dpi=150)
 
     lines = [
         f"Canonical SIMP cantilever benchmark: mesh {cfg['nx']}x{cfg['ny']} "
@@ -101,13 +102,14 @@ def main() -> None:
         "(0 = fully 0/1 design, 1 = every element at rho=0.5)",
     ]
     RESULTS_DIR.mkdir(exist_ok=True)
-    (RESULTS_DIR / "topopt_canonical.txt").write_text("\n".join(lines) + "\n")
-    np.save(RESULTS_DIR / "topopt_canonical_rho_phys.npy", res.rho_phys)
+    (RESULTS_DIR / f"topopt_canonical_{config_tag}.txt").write_text("\n".join(lines) + "\n")
+    np.save(RESULTS_DIR / f"topopt_canonical_rho_phys_{config_tag}.npy", res.rho_phys)
     for line in lines:
         print(line)
-    print("\nWrote figures/topopt_canonical_density.png, "
-          "figures/topopt_canonical_history.png, results/topopt_canonical.txt, "
-          "results/topopt_canonical_rho_phys.npy")
+    print(f"\nWrote figures/topopt_canonical_density_{config_tag}.png, "
+          f"figures/topopt_canonical_history_{config_tag}.png, "
+          f"results/topopt_canonical_{config_tag}.txt, "
+          f"results/topopt_canonical_rho_phys_{config_tag}.npy")
 
 
 if __name__ == "__main__":

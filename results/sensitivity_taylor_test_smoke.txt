@@ -1,0 +1,9 @@
+Sensitivity Taylor-remainder test: mesh 6x3, p=3.0, Vf=0.4, r_min=0.1, n_elements=18
+c(rho0) = 8.20690963e+02, grad.d = 3.98235891e+03
+
+         t        remainder   observed order
+   1.0e-01     1.985814e+02               --
+   1.0e-02     1.876279e+00            2.025
+   1.0e-03     1.846644e-02            2.007
+   1.0e-04     1.843614e-04            2.001
+   1.0e-05     1.843580e-06            2.000

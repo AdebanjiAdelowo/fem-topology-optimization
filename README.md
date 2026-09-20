@@ -162,7 +162,7 @@ $r(t)=|c(\rho_0+td)-c(\rho_0)-t\,\nabla c\cdot d|$ should shrink as $O(t^2)$
 | $10^{-5}$ | $1.364828\times10^{-7}$ | 2.000 |
 
 Clean convergence to order 2, confirming the analytic sensitivity before it is used to drive the
-optimizer. See `figures/sensitivity_taylor_test.png` and the analogous unit test
+optimizer. See `figures/sensitivity_taylor_test_local.png` and the analogous unit test
 `tests/test_simp.py::test_compliance_sensitivity_taylor_remainder`.
 
 ## Density filtering
@@ -209,8 +209,8 @@ $r_{\min}=0.08$ (`scripts/run_topopt.py`, `configs/local.yaml`):
   tolerance (see Convergence-criterion note below); the compliance history plateaus by roughly
   iteration 20.
 
-See `figures/topopt_canonical_density.png` (initial vs. final density) and
-`figures/topopt_canonical_history.png` (compliance/volume-fraction/max-change vs. iteration). The
+See `figures/topopt_canonical_density_local.png` (initial vs. final density) and
+`figures/topopt_canonical_history_local.png` (compliance/volume-fraction/max-change vs. iteration). The
 optimized topology is a two-bay diagonal-braced truss connecting the clamped edge to the load point --
 qualitatively the textbook SIMP cantilever result reported in Sigmund (2001) and Bendsoe & Sigmund
 (2003) for this aspect ratio and volume fraction. This visual resemblance is a qualitative sanity check,
@@ -242,7 +242,7 @@ effect (Sigmund & Petersson, 1998; Bourdin, 2001). $V_f=0.4$, $p=3$ (`scripts/me
 
 **Honest mesh-dependence finding**: the $30\times15$ mesh is under-resolved relative to its own (large,
 $r_{\min}=0.2\approx H/5$) filter length and produces a qualitatively different, diffuse blob-like
-design (`figures/mesh_study.png`, top panel) rather than a resolved truss. The $60\times30$ and
+design (`figures/mesh_study_local.png`, top panel) rather than a resolved truss. The $60\times30$ and
 $90\times45$ meshes produce the *same qualitative* two-bay diagonal-truss topology, but compliance is
 still decreasing (109.94 -> 94.39, about 14%) and grayness still falling between them -- the design is
 **qualitatively mesh-independent but not quantitatively mesh-converged** at these resolutions. This is
@@ -260,7 +260,7 @@ Mesh $60\times30$, $p=3$, $r_{\min}=0.08$ (`scripts/volume_fraction_study.py`):
 | 0.50 | 150 | 74.6319 | 0.2821 |
 
 Compliance decreases monotonically with more available material, as expected. See
-`figures/volume_fraction_study.png`: lower $V_f$ forces thinner, more sparsely braced members.
+`figures/volume_fraction_study_local.png`: lower $V_f$ forces thinner, more sparsely braced members.
 
 ## Penalization study
 
@@ -273,7 +273,7 @@ Mesh $60\times30$, $V_f=0.4$, $r_{\min}=0.08$ (`scripts/penalization_study.py`):
 | 3.0 | 150 | 101.3918 | 0.3171 |
 
 $p=1$ (no penalization, a linear rule-of-mixtures interpolation) achieves the lowest *reported*
-compliance but at grayness $\approx0.60$ -- `figures/penalization_study.png` shows this is because the
+compliance but at grayness $\approx0.60$ -- `figures/penalization_study_local.png` shows this is because the
 optimizer exploits intermediate ("grey", unpenalized) density to cheaply reduce the linear-interpolation
 compliance rather than committing to a discrete structural topology; the $p=1$ design is a diffuse blob,
 not a recognizable truss. $p=2$ and $p=3$ both converge to a near-binary, structurally interpretable
@@ -294,7 +294,7 @@ Mesh $60\times30$, $V_f=0.4$, $p=3$ (`scripts/filter_radius_study.py`):
 Larger $r_{\min}$ enforces a larger effective minimum member width, at the cost of both higher
 compliance (less design freedom) and higher grayness (more blending across the wider filter kernel);
 smaller $r_{\min}$ allows thinner, more efficient members but with less enforced manufacturability. See
-`figures/filter_radius_study.png`.
+`figures/filter_radius_study_local.png`.
 
 ## Post-hoc von Mises stress evaluation: explicitly NOT stress-constrained optimization
 
@@ -312,7 +312,7 @@ $$\sigma_{vm} = \sqrt{\sigma_{xx}^2 - \sigma_{xx}\sigma_{yy} + \sigma_{yy}^2 + 3
   regularization device, not a real material, so stress evaluated there is not interpretable):
   $129.119153$.
 
-`figures/topopt_stress_postprocess.png` shows the expected pattern: stress concentrates at the clamped
+`figures/topopt_stress_postprocess_local.png` shows the expected pattern: stress concentrates at the clamped
 corners and the point-load node -- a well-known feature of unconstrained-compliance topology
 optimization, and precisely the motivation for a genuinely different problem class,
 **stress-constrained topology optimization** (Duysinx & Bendsoe, 1998, "Topology optimization of
