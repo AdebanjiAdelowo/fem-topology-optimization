@@ -248,7 +248,9 @@ the physical density after 150 iterations. The plot title reports `converged=Fal
 max-change criterion was not met; see the note below.*
 
 **Convergence-criterion note.** The compliance objective converges quickly (essentially flat after
-~20 iterations) and the volume constraint is satisfied to within $3\times10^{-4}$ throughout, but the
+~20 iterations) and the volume fraction stays within $4.1\times10^{-4}$ of the target throughout (largest
+deviation 0.400409 at iteration 15; recomputed by replaying this deterministic run, which reproduces the
+saved final density exactly, since the per-iteration history is not saved), but the
 max-elementwise-design-change criterion does not decrease monotonically: it falls to $\approx0.01$
 around iteration 90-100 and then rises again to $\approx0.015$-$0.03$ before the run ends at
 `max_iter`. This is a documented, known behavior of OC-based SIMP optimization -- a small number of
@@ -256,6 +258,16 @@ elements near the 0/1 bounds and filter-transition zones can oscillate ("limit-c
 iterations even once the objective has effectively converged. It is reported honestly here rather than
 disguised by loosening the tolerance after the fact; the design and compliance are stable well before
 the run terminates, as the history figure shows directly.
+
+<p align="center">
+  <img src="figures/topopt_canonical_history_local.png" width="440"
+       alt="Compliance, volume fraction and maximum design change against iteration for the canonical run">
+</p>
+
+*Optimization history of the canonical run above (`configs/local.yaml`). Compliance falls from 617.9
+to a plateau near 101.4 by about iteration 20; the volume fraction stays within $4.1\times10^{-4}$ of
+the 0.4 target; the max design change stalls between $10^{-2}$ and $3\times10^{-2}$, above the
+$10^{-3}$ tolerance (dashed).*
 
 ## Mesh-resolution study
 
@@ -349,6 +361,15 @@ $$\sigma_{vm} = \sqrt{\sigma_{xx}^2 - \sigma_{xx}\sigma_{yy} + \sigma_{yy}^2 + 3
   **not physically meaningful** (the $E_{\min}$-scaled "material" in near-void regions is a numerical
   regularization device, not a real material, so stress evaluated there is not interpretable):
   $129.119153$.
+
+<p align="center">
+  <img src="figures/topopt_stress_postprocess_local.png" width="520"
+       alt="Compliance-optimized density and the post-hoc von Mises stress on its solid elements">
+</p>
+
+*Top: the canonical compliance-optimized density. Bottom: von Mises stress evaluated afterwards on
+elements with $\rho^{\text{phys}}\ge0.5$ (`scripts/postprocess_stress.py`, `configs/local.yaml`).
+Stress played no part in the optimization.*
 
 `figures/topopt_stress_postprocess_local.png` shows the expected pattern: stress concentrates at the clamped
 corners and the point-load node -- a well-known feature of unconstrained-compliance topology
